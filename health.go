@@ -76,29 +76,9 @@ func (h *healthState) handleHealth(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *healthState) handleHealthADS(w http.ResponseWriter, r *http.Request) {
-	a, p, s := h.get()
-	if a {
-		writeHealth(w, a, p, s, http.StatusOK)
-	} else {
-		writeHealth(w, a, p, s, http.StatusServiceUnavailable)
-	}
-}
-
-func (h *healthState) handleHealthPLC(w http.ResponseWriter, r *http.Request) {
-	a, p, s := h.get()
-	if p {
-		writeHealth(w, a, p, s, http.StatusOK)
-	} else {
-		writeHealth(w, a, p, s, http.StatusServiceUnavailable)
-	}
-}
-
 func newHTTPServer(listen string, state *healthState) *http.Server {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /health", state.handleHealth)
-	mux.HandleFunc("GET /health/ads", state.handleHealthADS)
-	mux.HandleFunc("GET /health/plc", state.handleHealthPLC)
 	return &http.Server{Addr: listen, Handler: mux}
 }
 

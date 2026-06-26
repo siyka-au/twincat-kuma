@@ -1,0 +1,16 @@
+server:
+  listen: ":8080"
+
+connection:
+  target_net_id: "10.10.106.10.1.1"
+  router_host: "127.0.0.1"
+  router_port: 48898
+  timeout: 2s
+
+poll_interval: 10s
+push_interval: 30s
+
+ads:
+  - uptime-kuma: http://10.10.20.150:3001/api/push/AzbqXs6s4c
+plc:
+  - uptime-kuma: http://10.10.20.150:3001/api/push/fCXo52mZkb
